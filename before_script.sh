@@ -32,7 +32,7 @@ fi
 
 echo $PATH
 
-wget -O tmp_chromedriver $CONFIG_SERVER/chromedriver
-sudo chmod +x tmp_chromedriver
-sudo mv tmp_chromedriver /usr/local/bin/ChromeDriver
+sudo ln -s `pwd`/tests/travis_configs/chromedriver /usr/local/bin/ChromeDriver
 sudo bash /etc/init.d/xvfb start
+
+
