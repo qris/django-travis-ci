@@ -4,12 +4,14 @@ DATABASES = {
         'NAME': 'django',
         'HOST': 'localhost',
         'USER': 'postgres',
+        'TABLE_TYPE': 'UNLOGGED',
     },
     'other': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django2',
         'HOST': 'localhost',
         'USER': 'postgres',
+        'TABLE_TYPE': 'UNLOGGED',
     }
 }
 
