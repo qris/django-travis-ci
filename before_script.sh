@@ -32,12 +32,9 @@ fi
 
 echo $PATH
 
-sudo ln -s `pwd`/tests/travis_configs/chromedriver /usr/local/bin/ChromeDriver
-which ChromeDriver
-hash -r
-which ChromeDriver
-stat /usr/local/bin/ChromeDriver
-stat -L /usr/local/bin/ChromeDriver
+sudo ln -s `pwd`/tests/travis_configs/chromedriver /usr/local/bin
+which chromedriver
+stat -L /usr/local/bin/chromedriver
 
 sudo bash /etc/init.d/xvfb start
 
