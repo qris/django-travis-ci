@@ -3,6 +3,7 @@ set -e
 
 # Use pip because we may be running with a different python than the
 # system one, in which case system packages won't be visible.
+sudo apt-get update
 sudo apt-get build-dep python-imaging
 pip install selenium pytz markdown textile docutils py-bcrypt PyYAML PIL pylibmc Sphinx
 
