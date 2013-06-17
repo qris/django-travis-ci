@@ -38,4 +38,28 @@ stat -L /usr/local/bin/chromedriver
 
 sudo bash /etc/init.d/xvfb start
 
+# Experimental fixes for running out of disk space on Travis
+# https://github.com/travis-ci/travis-ci/issues/1125
+# Disabled for testing whether Josh's increased ramdisk has fixed the
+# problems.
+
+if false; then
+	postgresql_conf=/etc/postgresql/9.1/main/postgresql.conf
+	data_directory=`sudo awk '/data_directory/{ print $3 }' $postgresql_conf`
+
+	sudo tee -a $postgresql_conf <<EOF
+	restart_after_crash = off
+	checkpoint_timeout = 30
+	checkpoint_segments = 1
+	log_min_messages = info
+	log_checkpoints = on
+	log_temp_files = 1024
+	log_autovacuum_min_duration = 0
+EOF
+
+	sudo /etc/init.d/postgresql stop
+	sudo mv $data_directory/pg_xlog /tmp
+	sudo ln -s /tmp/pg_xlog $data_directory
+	sudo /etc/init.d/postgresql start
+fi
 
